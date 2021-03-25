@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ImapX.Constants
+﻿namespace ImapX.Constants
 {
     public static class FolderStatusFields
     {
@@ -31,6 +26,5 @@ namespace ImapX.Constants
         /// The number of messages which do not have the \Seen flag set.
         /// </summary>
         public const string Unseen = "Unseen";
-
     }
 }

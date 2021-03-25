@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ImapX.Flags
+﻿namespace ImapX.Flags
 {
     /// <summary>
     /// Predefined system Message flags
@@ -40,6 +35,5 @@ namespace ImapX.Flags
         /// WARNING: This flag can not be altered by the client.
         /// </summary>
         public const string Recent = @"\Recent";
-
     }
 }

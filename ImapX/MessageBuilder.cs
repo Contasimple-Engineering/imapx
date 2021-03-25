@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using ImapX.Enums;
-using ImapX.Extensions;
-
 
 namespace ImapX
 {

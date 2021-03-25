@@ -9,7 +9,6 @@ using ImapX.Enums;
 using ImapX.Exceptions;
 using ImapX.Extensions;
 using ImapX.Flags;
-using System.Collections;
 using ImapX.Parsing;
 using System.ComponentModel;
 

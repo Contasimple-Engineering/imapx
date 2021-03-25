@@ -2,7 +2,6 @@
 using System.IO;
 using System.Text;
 using ImapX.Constants;
-using ImapX.Parsing;
 
 namespace ImapX.Authentication
 {

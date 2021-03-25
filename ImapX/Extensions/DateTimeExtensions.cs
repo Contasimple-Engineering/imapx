@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 
 namespace ImapX.Extensions
 {
     public static class DateTimeExtensions
     {
-
         internal static readonly char[] allowedWhiteSpaceChars;
         internal static readonly string[] validDateTimeFormats;
         internal static readonly IDictionary<string, TimeSpan> timeZoneOffsetLookup;

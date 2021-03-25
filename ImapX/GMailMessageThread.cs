@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ImapX.Collections;
+﻿using ImapX.Collections;
 using ImapX.Enums;
 
 namespace ImapX

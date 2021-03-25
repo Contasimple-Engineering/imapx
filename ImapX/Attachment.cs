@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
+﻿using System.IO;
 using System.Net.Mime;
 using System.Text;
 using ImapX.EncodingHelpers;

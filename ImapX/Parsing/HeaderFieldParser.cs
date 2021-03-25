@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using ImapX.EncodingHelpers;
 using System.Net.Mime;
 using System.Text;
