@@ -24,8 +24,6 @@ namespace ImapX.Extensions
             return tmp;
         }
 
-#if !WINDOWS_PHONE && !NETFX_CORE
-
         public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this NameValueCollection col)
         {
             var dict = new Dictionary<TKey, TValue>();
@@ -41,8 +39,6 @@ namespace ImapX.Extensions
 
             return dict;
         }
-
-#endif
 
         public static List<MailAddress> ToMailAddressList(this MailAddressCollection col)
         {

@@ -12,18 +12,10 @@ using ImapX.Constants;
 using ImapX.Enums;
 using ImapX.Exceptions;
 using ImapX.Parsing;
-
-#if !NETFX_CORE
 using System.Security.Cryptography.X509Certificates;
 using ThreadState = System.Threading.ThreadState;
 using Timer = System.Timers.Timer;
-#endif
-#if WINDOWS_PHONE || NETFX_CORE
-using SocketEx;
-#else
 using System.Net.Security;
-
-#endif
 
 namespace ImapX
 {
@@ -224,7 +216,6 @@ namespace ImapX
 
             try
             {
-#if !WINDOWS_PHONE && !NETFX_CORE
                 _client = new TcpClient(_host, _port);
 
                 if (_sslProtocol == SslProtocols.None)
@@ -238,12 +229,6 @@ namespace ImapX
                     (_ioStream as SslStream).AuthenticateAsClient(_host, null, _sslProtocol, false);
                     _streamReader = new StreamReader(_ioStream);
                 }
-#else
-    //TODO: Add support for Tls
-                _client = _sslProtocol == SslProtocols.None ? new TcpClient(_host, _port) : new SecureTcpClient(_host, _port);
-                _ioStream = _client.GetStream();
-                _streamReader = new StreamReader(_ioStream);
-#endif
 
                 string result = _streamReader.ReadLine();
 
@@ -300,9 +285,8 @@ namespace ImapX
             if (!IsConnected)
                 return;
 
-#if !NETFX_CORE
             StopIdling();
-#endif
+
             if (_streamReader != null)
                 _streamReader.Dispose();
 
@@ -310,15 +294,8 @@ namespace ImapX
                 _ioStream.Dispose();
 
             if (_client != null)
-#if !WINDOWS_PHONE && !NETFX_CORE
                 _client.Close();
-#else
-                _client.Dispose();
-#endif
         }
-
-
-#if !WINDOWS_PHONE && !NETFX_CORE
 
         /// <summary>
         ///     The certificate validation callback
@@ -328,8 +305,6 @@ namespace ImapX
         {
             return sslPolicyErrors == SslPolicyErrors.None || !_validateServerCertificate;
         }
-
-#endif
 
         protected void Capability()
         {
@@ -341,10 +316,9 @@ namespace ImapX
         public bool SendAndReceive(string command, ref IList<string> data, CommandProcessor processor = null,
             Encoding encoding = null, bool pushResultToDatadespiteProcessor = false)
         {
-#if !NETFX_CORE
             if (_idleState == IdleState.On)
                 PauseIdling();
-#endif
+
             lock (_lock)
             {
                 if (_client == null || !_client.Connected)
@@ -375,10 +349,9 @@ namespace ImapX
 
                     if (tmp == null)
                     {
-#if !NETFX_CORE
                         if (_idleState == IdleState.Paused)
                             StartIdling();
-#endif
+
                         return false;
                     }
 
@@ -411,29 +384,26 @@ namespace ImapX
 
                     if (tmp.StartsWith(string.Format(tmpl, _counter, ResponseType.Ok)))
                     {
-#if !NETFX_CORE
                         if (_idleState == IdleState.Paused)
                             StartIdling();
-#endif
+
                         return true;
                     }
 
                     if (tmp.StartsWith(string.Format(tmpl, _counter, ResponseType.PreAuth)))
                     {
-#if !NETFX_CORE
                         if (_idleState == IdleState.Paused)
                             StartIdling();
-#endif
+
                         return true;
                     }
 
                     if (tmp.StartsWith(string.Format(tmpl, _counter, ResponseType.No)) ||
                         tmp.StartsWith(string.Format(tmpl, _counter, ResponseType.Bad)))
                     {
-#if !NETFX_CORE
                         if (_idleState == IdleState.Paused)
                             StartIdling();
-#endif
+
                         Match serverAlertMatch = Expressions.ServerAlertRex.Match(tmp);
                         if (serverAlertMatch.Success && tmp.Contains("IMAP") && tmp.Contains("abled"))
                             throw new ServerAlertException(serverAlertMatch.Groups[1].Value);
@@ -442,8 +412,6 @@ namespace ImapX
                 }
             }
         }
-
-#if !NETFX_CORE
 
         #region Idle support
 
@@ -695,7 +663,5 @@ namespace ImapX
         public event EventHandler<IdleEventArgs> OnIdleStopped;
 
         #endregion
-
-#endif
     }
 }

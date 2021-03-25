@@ -647,18 +647,6 @@ namespace ImapX
             Folder.Messages.RemoveInternal(this);
             return true;
         }
-
-#if !WINDOWS_PHONE
-
-        ///// <summary>
-        /////     Converts a <code>System.Net.Mail.MailMessage to <code>ImapX.Message</code></code>
-        ///// </summary>
-        ///// <param name="mailMessage">The mail message to be converted</param>
-        //public static Message FromMailMessage(System.Net.Mail.MailMessage mailMessage)
-        //{
-        //    return ImapX.MessageBuilder.FromMailMessage(mailMessage);
-        //}
-#endif
         
         /// <summary>
         ///     Creates a new <code>ImapX.Message</code> from EML
@@ -693,14 +681,6 @@ namespace ImapX
             Save(Path.Combine(folderPath, fileName));
         }
 
-#if NETFX_CORE
-
-        public void Save(string filePath)
-        {
-            //TODO
-        }
-
-#else
         /// <summary>
         ///     Saves the current message as eml to file
         /// </summary>
@@ -716,8 +696,6 @@ namespace ImapX
                     textWriter.Write(ToEml());
             }
         }
-
-#endif
 
         
     }

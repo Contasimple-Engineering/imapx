@@ -441,10 +441,10 @@ namespace ImapX
 
             if (_client.SelectedFolder == this && !ReadOnly)
                 return true;
-#if !NETFX_CORE
+
             if (_client.IdleState == IdleState.On)
                 _client.StopIdling();
-#endif
+
             IList<string> data = new List<string>();
             string rewritePath = _path.Replace(Client.Behavior.FolderDelimeter.ToString(),
                 Client.Behavior.FolderDelimeterString);
@@ -470,7 +470,7 @@ namespace ImapX
 
             return true;
         }
-#if !NETFX_CORE
+
         public bool StartIdling()
         {
             return _client.Capabilities.Idle && Select() && _client.StartIdling();
@@ -480,7 +480,7 @@ namespace ImapX
         {
             _client.StopIdling();
         }
-#endif
+
         internal Message[] Fetch(IEnumerable<long> uIds, MessageFetchMode mode = MessageFetchMode.ClientDefault)
         {
 
@@ -588,8 +588,6 @@ namespace ImapX
                 ref data, msgUploader);
         }
 
-#if !WINDOWS_PHONE && !NETFX_CORE
-
         public bool AppendMessage(System.Net.Mail.MailMessage mailMessage)
         {
             if (mailMessage == null)
@@ -605,8 +603,6 @@ namespace ImapX
             }
 
         }
-
-#endif
 
         /// <summary>
         ///     Removes all messages from current folder

@@ -11,39 +11,6 @@ namespace ImapX
 {
     internal class MessageBuilder
     {
-
-#if !WINDOWS_PHONE
-
-        ///// <summary>
-        ///// Converts a <code>System.Net.Mail.MailMessage to <code>ImapX.Message</code></code>
-        ///// </summary>
-        ///// <param name="mailMessage">The mail message to be converted</param>
-        //public static Message FromMailMessage(MailMessage mailMessage)
-        //{
-        //    if (mailMessage == null)
-        //        throw new ArgumentNullException();
-
-        //    var msg = new Message
-        //    {
-        //        Headers = mailMessage.Headers.ToDictionary<string, string>(),
-        //        Subject = mailMessage.Subject,
-        //        Bcc = mailMessage.Bcc.ToMailAddressList(),
-        //        Cc = mailMessage.CC.ToMailAddressList(),
-        //        From = (MailAddress)(mailMessage.From ?? mailMessage.Sender),
-        //        ReplyTo = mailMessage.ReplyToList.ToMailAddressList(),
-        //        To = mailMessage.To.ToMailAddressList(),
-        //        Sender = (MailAddress)(mailMessage.Sender ?? mailMessage.From)
-
-        //    };
-
-        //    // TODO: body + attachments
-
-            
-
-        //    return msg;
-        //}
-
-#endif
         
         /// <summary>
         /// Creates a new <code>ImapX.Message</code> from EML

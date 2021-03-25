@@ -117,14 +117,6 @@ namespace ImapX
             }
         }
 
-#if NETFX_CORE
-
-        public void Save(string folder, string fileName = null)
-        {
-            //TODO
-        }
-
-#else
         public void Save(string folder, string fileName = null)
         {
             string path = Path.Combine(folder,
@@ -138,8 +130,6 @@ namespace ImapX
             }
 
         }
-
-#endif
 
         public long FileSize
         {

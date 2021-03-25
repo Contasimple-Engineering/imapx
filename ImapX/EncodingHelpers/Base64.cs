@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-#if !NETFX_CORE
 using System.Security.Cryptography;
-#endif
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -32,10 +30,6 @@ namespace ImapX.EncodingHelpers
         /// <returns></returns>
         public static string ToBase64(byte[] data)
         {
-
-#if WINDOWS_PHONE || NETFX_CORE
-            return Convert.ToBase64String(data);
-#else
             var builder = new StringBuilder();
             using (var writer = new StringWriter(builder))
             {
@@ -74,7 +68,6 @@ namespace ImapX.EncodingHelpers
                 writer.Close();
             }
             return builder.ToString();
-#endif
         }
 
         /// <summary>
@@ -84,9 +77,6 @@ namespace ImapX.EncodingHelpers
         /// <returns></returns>
         public static byte[] FromBase64(string s)
         {
-#if WINDOWS_PHONE || NETFX_CORE
-            return Convert.FromBase64String(s);
-#else
             byte[] bytes;
 
             //s = Regex.Replace(Regex.Replace(s, @"\r\n?|\n", string.Empty), @"--.*", string.Empty);
@@ -131,7 +121,6 @@ namespace ImapX.EncodingHelpers
                 writer.Close();
             }
             return bytes;
-#endif
         }
     }
 }
